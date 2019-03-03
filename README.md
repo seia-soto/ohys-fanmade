@@ -7,7 +7,7 @@ The fanmade site of Ohys-Raws.
 - [x] Loading JSON data with XHR
 - [x] Printing file resolution
 - [ ] Making page identifier at bottom
-- [ ] Searching torrents
+- [x] Searching torrents
 
 ## Adaptation
 

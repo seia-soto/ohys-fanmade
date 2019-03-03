@@ -33,15 +33,15 @@
     <div class="container">
       <div class="row">
         <div class="ten columns">
-          <input id="SearchInput" class="u-full-width" type="text" placeholder="Search torrents..">
+          <input id="SearchInput" class="u-full-width" type="text" placeholder="Search torrents.." onkeypress="if (event.keyCode == 13) { searchTorrent() }">
         </div>
         <div class="two columns">
-          <input type="button" value="Search">
+          <input type="button" value="Search" onclick="searchTorrent()">
         </div>
       </div>
     </div>
     <div class="container">
-      <table id="TorrentTable" class="u-full-width">
+      <table class="u-full-width">
         <thead>
           <tr>
             <th>Torrent</th>
@@ -49,7 +49,7 @@
             <th>Download</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="TorrentTable">
           <!-- Wait for data -->
         </tbody>
       </table>
