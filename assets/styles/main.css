@@ -1,0 +1,31 @@
+/* disable default styles */
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/* header and navigation */
+header {
+  height: 50px;
+
+  margin-bottom: 15px;
+
+  color: lightgrey;
+  background-color: #453f3d;
+}
+
+nav.navigation {
+  padding-top: 11.5px;
+}
+
+.navigation.item {
+  padding-left: 14px;
+}
+.navigation.item.main {
+  color: white;
+  padding-right: 14px;
+  padding-left: 0px;
+}
+.navigation.item.right {
+  float: right;
+}
