@@ -32,11 +32,19 @@
     </header>
     <div class="container">
       <div class="row">
-        <div class="ten columns">
-          <input id="SearchInput" class="u-full-width" type="text" placeholder="Search torrents.." onkeypress="if (event.keyCode == 13) { searchTorrent() }">
+        <div class="seven columns">
+          <input id="SearchInput" class="u-full-width" type="text" placeholder="Search torrents.." onkeypress="if (event.keyCode == 13) { makeList({ includeInput: true, clearTable: true }) }">
+        </div>
+        <div class="three columns">
+          <select id="DirSelector" class="u-full-width">
+            <option value="new">New</option>
+            <option value="old16">2016</option>
+            <option value="old17">2017</option>
+            <option value="old18">2018</option>
+          </select>
         </div>
         <div class="two columns">
-          <input type="button" value="Search" onclick="searchTorrent()">
+          <input type="button" value="Search" onclick="makeList({ includeInput: true, clearTable: true })">
         </div>
       </div>
     </div>
@@ -53,6 +61,9 @@
           <!-- Wait for data -->
         </tbody>
       </table>
+    </div>
+    <div class="container">
+      <input type="button" value="Load more" onclick="ViewPage++; makeList({ includeInput: true, clearTable: false })">
     </div>
   </body>
 </html>

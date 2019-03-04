@@ -6,7 +6,8 @@ The fanmade site of Ohys-Raws.
 
 - [x] Loading JSON data with XHR
 - [x] Printing file resolution
-- [ ] Making page identifier at bottom
+- [x] Making page identifier at bottom
+- [x] Adding directory selector at top
 - [x] Searching torrents
 
 ## Adaptation

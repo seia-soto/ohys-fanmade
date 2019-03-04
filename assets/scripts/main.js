@@ -1,9 +1,12 @@
 const BaseURL = 'https://app.seia.io/Ohys-Fanmade/'
 const CurrentURL = new URL(window.location.href)
+const OriginalURL = 'https://torrents.ohys.net/t/'
 
 const ResolutionPattern = /\d{3,4}x\d{3,4}/
 
-const ListType = 'new'
+let ViewList = 'new'
+let ViewPage = 0
+let ViewLast = ''
 
 function appendTable(toAppend) {
   const TorrentTable = document.querySelector('#TorrentTable')
@@ -44,24 +47,34 @@ function requestData(url) {
   })
 }
 
-function searchTorrent() {
+function makeList(options) {
   const SearchInput = document.querySelector('#SearchInput')
-  clearTable('Searching torrents...')
+  const DirSelector = document.querySelector('#DirSelector')
 
-  requestData(
+  if (DirSelector.value !== ViewList) ViewPage = 0
+
+  let RequestURL =
     BaseURL + 'json.php?' +
-    'p=' + CurrentURL.searchParams.get('page') +
-    '&dir=' + ListType +
-    '&q=' + SearchInput.value
-  ).then(buffer => {
-    clearTable()
+    'dir=' + (DirSelector.value || ViewList) +
+    '&p=' + ViewPage
+  if (options.includeInput) RequestURL += ('&q=' + SearchInput.value) || ''
+  if (options.clearTable) clearTable('Loading...')
 
+  requestData(RequestURL).then(buffer => {
+    if (options.clearTable) clearTable('')
     const data = JSON.parse(buffer)
+
     if (data[0]) {
+      if (ViewLast === data[0].t) {
+        alert('End of results! There is no more data to append.')
+        return
+      }
+      ViewLast = data[0].t
+
       data.forEach(torrent => {
         const TorrentName = torrent.t
         const Resolution = TorrentName.match(ResolutionPattern) || 'Not recognized'
-        const DownloadLink = '<a href="' + BaseURL + torrent.a + '">Download</a>'
+        const DownloadLink = '<a href="' + OriginalURL + torrent.a + '">Download</a>'
 
         appendTable({
           torrent: TorrentName,
@@ -70,30 +83,24 @@ function searchTorrent() {
         })
       })
     } else {
-      clearTable('No results.')
+      if (options.clearTable) clearTable('No results.')
     }
   })
 }
 
+function rebuildList(options) {
+  ViewList = options.ViewList || ViewList
+  ViewPage = options.ViewPage || ViewPage
+
+  makeList({
+    includeInput: false,
+    clearTable: true
+  })
+}
+
 document.addEventListener('DOMContentLoaded', function(event) {
-  requestData(
-    BaseURL + 'json.php?' +
-    'p=' + CurrentURL.searchParams.get('page') +
-    '&dir=' + ListType
-  ).then(buffer => {
-    const data = JSON.parse(buffer)
-
-    data.forEach(torrent => {
-      const TorrentName = torrent.t
-      const Resolution = TorrentName.match(ResolutionPattern) || 'Not recognized'
-      const DownloadLink =
-        '<a href="' + BaseURL + torrent.a + '">Download</a>'
-
-      appendTable({
-        torrent: TorrentName,
-        resolution: Resolution,
-        download: DownloadLink
-      })
-    })
+  makeList({
+    includeInput: false,
+    clearTable: false
   })
 })
