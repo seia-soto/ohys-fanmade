@@ -1,5 +1,4 @@
 const BaseURL = 'https://app.seia.io/Ohys-Fanmade/'
-const CurrentURL = new URL(window.location.href)
 const OriginalURL = 'https://torrents.ohys.net/t/'
 
 const ResolutionPattern = /\d{3,4}x\d{3,4}/
