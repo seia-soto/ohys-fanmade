@@ -5,7 +5,7 @@ const ResolutionPattern = /\d{3,4}x\d{3,4}/
 
 let ViewList = 'new'
 let ViewPage = 0
-let ViewLast = ''
+let ViewLast = { name: '', uri: '' }
 
 function appendTable(toAppend) {
   const TorrentTable = document.querySelector('#TorrentTable')
@@ -56,7 +56,7 @@ function makeList(options) {
     BaseURL + 'json.php?' +
     'dir=' + (DirSelector.value || ViewList) +
     '&p=' + ViewPage
-  if (options.includeInput) RequestURL += ('&q=' + SearchInput.value) || ''
+  if (options.includeInput && SearchInput.value !== '') RequestURL += ('&q=' + SearchInput.value)
   if (options.clearTable) clearTable('Loading...')
 
   requestData(RequestURL).then(buffer => {
@@ -64,11 +64,14 @@ function makeList(options) {
     const data = JSON.parse(buffer)
 
     if (data[0]) {
-      if (ViewLast === data[0].t) {
+      if (ViewLast.name === data[0].t && ViewLast.uri !== RequestURL) {
         alert('End of results! There is no more data to append.')
         return
       }
-      ViewLast = data[0].t
+      ViewLast = {
+        name: data[0].t,
+        uri: RequestURL
+      }
 
       data.forEach(torrent => {
         const TorrentName = torrent.t
