@@ -33,7 +33,7 @@
     <div class="container">
       <div class="row">
         <div class="seven columns">
-          <input id="SearchInput" class="u-full-width" type="text" placeholder="Search torrents.." onkeypress="if (event.keyCode == 13) { makeList({ includeInput: true, clearTable: true }) }">
+          <input id="SearchInput" class="u-full-width" type="text" placeholder="Search torrents.." onkeypress="if (event.keyCode == 13) { ViewPage = 0; makeList({ includeInput: true, clearTable: true }) }">
         </div>
         <div class="three columns">
           <select id="DirSelector" class="u-full-width">
@@ -44,7 +44,7 @@
           </select>
         </div>
         <div class="two columns">
-          <input type="button" value="Search" onclick="makeList({ includeInput: true, clearTable: true })">
+          <input type="button" value="Search" onclick="ViewPage = 0; makeList({ includeInput: true, clearTable: true })">
         </div>
       </div>
     </div>
