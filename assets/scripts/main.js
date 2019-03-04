@@ -50,7 +50,7 @@ function makeList(options) {
   const SearchInput = document.querySelector('#SearchInput')
   const DirSelector = document.querySelector('#DirSelector')
 
-  if (DirSelector.value !== ViewList.name) ViewPage = 0
+  if (DirSelector.value !== ViewList) ViewPage = 0
 
   let RequestURL =
     BaseURL + 'json.php?' +
