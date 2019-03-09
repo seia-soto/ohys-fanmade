@@ -62,7 +62,7 @@ function makeList(options) {
   if (options.includeInput && SearchInput.value !== '') RequestURL += ('&q=' + SearchInput.value)
   if (options.clearTable) clearTable('Loading...')
 
-  requestData(RequestURL).then(buffer => {
+  requestData(RequestURL).then(function(buffer) {
     if (options.clearTable) clearTable('')
     const data = JSON.parse(buffer)
 
@@ -76,7 +76,7 @@ function makeList(options) {
         uri: RequestURL
       }
 
-      data.forEach(torrent => {
+      data.forEach(function(torrent) {
         const TorrentName = torrent.t
         const Resolution = TorrentName.match(ResolutionPattern) || 'Not recognized'
         const DownloadLink = '<a href="' + OriginalURL + torrent.a + '">Download</a>'
