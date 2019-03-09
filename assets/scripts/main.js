@@ -103,6 +103,14 @@ function rebuildList(options) {
   })
 }
 
+function downloadList() {
+  Object.values(TorrentTable.rows).forEach(function(row, i) {
+    setTimeout(function() {
+      window.location = row.querySelector('a').href
+    }, 900 + i * 900)
+  })
+}
+
 document.addEventListener('DOMContentLoaded', function(event) {
   makeList({
     includeInput: false,
