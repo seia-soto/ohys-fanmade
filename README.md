@@ -2,13 +2,11 @@
 
 The fanmade site of Ohys-Raws.
 
-## Todo
+## Features
 
-- [x] Loading JSON data with XHR
-- [x] Printing file resolution
-- [x] Making page identifier at bottom
-- [x] Adding directory selector at top
-- [x] Searching torrents
+- Search uploaded raws and print it as list.
+- Download all torrent files from list.
+- See resolution of uploaded raw at list.
 
 ## Adaptation
 
@@ -18,6 +16,5 @@ You can see `BaseURL` at line 5, edit it to relative path from public.
 
 ```js
 const BaseURL = 'https://app.seia.io/Ohys-Fanmade/'
-const CurrentURL = new URL(window.location.href)
 const OriginalURL = 'https://torrents.ohys.net/t/'
 ```
