@@ -10,7 +10,7 @@ The fanmade site of Ohys-Raws.
 
 ## Adaptation
 
-Open `assets/scripts/main.js` with your editor.
+Move `index.sample.html` to `index.html`, then open `assets/scripts/main.js` with your editor.
 
 You can see `BaseURL` at line 5, edit it to relative path from public.
 
@@ -18,3 +18,10 @@ You can see `BaseURL` at line 5, edit it to relative path from public.
 const BaseURL = 'https://app.seia.io/Ohys-Fanmade/'
 const OriginalURL = 'https://torrents.ohys.net/t/'
 ```
+
+If you want to use minified version of statics, change `~.ext` to `~.min.ext` in `index.html`.
+Included JavaScript and CSS both have minified version.
+
+## Browser accessibility
+
+Preparing

@@ -152,10 +152,10 @@ function switchTheme() {
 
   if (ViewMode == 0) {
     Body.style['background-color'] = '#232b2b'
-    App.style.color = 'white'
+    App.style.color = 'lightgrey'
 
-    SearchButton.style.color = 'white'
-    LoadmoreButton.style.color = 'white'
+    SearchButton.style.color = 'lightgrey'
+    LoadmoreButton.style.color = 'lightgrey'
 
     ViewMode = 1
   } else {
