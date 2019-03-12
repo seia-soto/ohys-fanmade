@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="assets/styles/skeleton.min.css">
     <link rel="stylesheet" href="assets/styles/main.min.css">
 
-    <script src="assets/scripts/main.min.js" charset="utf-8"></script>
+    <script src="assets/scripts/main.js" charset="utf-8"></script>
   </head>
   <body>
     <header>
@@ -29,6 +29,10 @@
         </span>
         <span class="navigation item">
           <a href="https://torrents.ohys.net/t/rss.php?dir=new">RSS</a>
+        </span>
+        <!-- right items -->
+        <span class="navigation right item">
+          <a onclick="setMode()">NightMode</a>
         </span>
       </nav>
     </header>
@@ -46,11 +50,11 @@
           </select>
         </div>
         <div class="two columns">
-          <input type="button" value="Search" onclick="ViewPage = 0; makeList({ includeInput: true, clearTable: true })">
+          <input id="SearchButton" type="button" value="Search" onclick="ViewPage = 0; makeList({ includeInput: true, clearTable: true })">
         </div>
       </div>
     </div>
-    <div class="container">
+    <div id="app" class="container">
       <table class="u-full-width">
         <thead>
           <tr>
@@ -65,7 +69,7 @@
       </table>
     </div>
     <div class="container">
-      <input class="u-full-width" type="button" value="Load more" onclick="ViewPage++; makeList({ includeInput: true, clearTable: false })">
+      <input id="LoadmoreButton" class="u-full-width" type="button" value="Load more" onclick="ViewPage++; makeList({ includeInput: true, clearTable: false })">
     </div>
   </body>
 </html>
