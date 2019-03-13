@@ -179,13 +179,3 @@ function setMode() {
     setCookie('nightmode', '0', 7)
   }
 }
-
-document.addEventListener('DOMContentLoaded', function(event) {
-  ViewMode = getCookie('nightmode') || 1
-  switchTheme()
-
-  makeList({
-    includeInput: false,
-    clearTable: false
-  })
-})

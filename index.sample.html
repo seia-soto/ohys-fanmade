@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="assets/styles/normalize.min.css">
     <link rel="stylesheet" href="assets/styles/skeleton.min.css">
     <link rel="stylesheet" href="assets/styles/main.css">
-
-    <script src="assets/scripts/main.js" charset="utf-8"></script>
   </head>
   <body>
     <header>
@@ -36,7 +34,7 @@
         </span>
       </nav>
     </header>
-    <div class="container">
+    <article id="fullAppFrame" class="container">
       <div class="row">
         <div class="seven columns">
           <input id="SearchInput" class="u-full-width" type="text" placeholder="Search torrents.." onkeypress="if (event.keyCode == 13) { ViewPage = 0; makeList({ includeInput: true, clearTable: true }) }">
@@ -53,23 +51,37 @@
           <input id="SearchButton" type="button" value="Search" onclick="ViewPage = 0; makeList({ includeInput: true, clearTable: true })">
         </div>
       </div>
-    </div>
-    <div id="app" class="container">
-      <table class="u-full-width">
-        <thead>
-          <tr>
-            <th>Torrent</th>
-            <th>Resolution</th>
-            <th><a onclick="downloadList()">Download all*</a></th>
-          </tr>
-        </thead>
-        <tbody id="TorrentTable">
-          <!-- Wait for data -->
-        </tbody>
-      </table>
-    </div>
-    <div class="container">
-      <input id="LoadmoreButton" class="u-full-width" type="button" value="Load more" onclick="ViewPage++; makeList({ includeInput: true, clearTable: false })">
-    </div>
+      <div id="app">
+        <table class="u-full-width">
+          <thead>
+            <tr>
+              <th>Torrent</th>
+              <th>Resolution</th>
+              <th><a onclick="downloadList()">Download all*</a></th>
+            </tr>
+          </thead>
+          <tbody id="TorrentTable">
+            <!-- Wait for data -->
+          </tbody>
+        </table>
+      </div>
+      <div class="container">
+        <input id="LoadmoreButton" class="u-full-width" type="button" value="Load more" onclick="ViewPage++; makeList({ includeInput: true, clearTable: false })">
+      </div>
+    </article>
+
+    <script src="assets/scripts/main.js" charset="utf-8"></script>
+    <script src="assets/scripts/detectie.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function(event) {
+        ViewMode = getCookie('nightmode') || 1
+        switchTheme()
+
+        makeList({
+          includeInput: false,
+          clearTable: false
+        })
+      })
+    </script>
   </body>
 </html>
