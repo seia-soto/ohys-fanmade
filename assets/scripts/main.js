@@ -61,21 +61,19 @@ function clearTable(toShow) {
 }
 
 function requestData(url) {
-  return new Promise(function(resolve, reject) {
-    let request = new XMLHttpRequest()
+  let request = new XMLHttpRequest()
 
-    request.open('GET', url, false)
-    request.setRequestHeader(
-      'Content-Type', 'application/x-www-form-urlencoded; Charset=utf-8'
-    )
+  request.open('GET', url, false)
+  request.setRequestHeader(
+    'Content-Type', 'application/x-www-form-urlencoded; Charset=utf-8'
+  )
 
-    request.send(null)
-    if (request.readyState === 4  && request.status === 200) {
-      resolve(request.responseText)
-    } else {
-      reject(request.status)
-    }
-  })
+  request.send(null)
+  if (request.readyState === 4  && request.status === 200) {
+    return request.responseText
+  } else {
+    return request.status
+  }
 }
 
 function makeList(options) {
@@ -94,35 +92,33 @@ function makeList(options) {
   if (options.includeInput && SearchInput.value !== '') RequestURL += ('&q=' + SearchInput.value)
   if (options.clearTable) clearTable('Loading...')
 
-  requestData(RequestURL).then(function(buffer) {
-    if (options.clearTable) clearTable('')
-    const data = JSON.parse(buffer)
+  const buffer = requestData(RequestURL)
+  const data = JSON.parse(buffer)
 
-    if (data[0]) {
-      if (ViewLast.name === data[0].t && ViewLast.uri !== RequestURL) {
-        alert('End of results! There is no more data to append.')
-        return
-      }
-      ViewLast = {
-        name: data[0].t,
-        uri: RequestURL
-      }
-
-      data.forEach(function(torrent) {
-        const TorrentName = torrent.t
-        const Resolution = TorrentName.match(ResolutionPattern) || 'Not recognized'
-        const DownloadLink = '<a href="' + OriginalURL + torrent.a + '">Download</a>'
-
-        appendTable({
-          torrent: TorrentName,
-          resolution: Resolution,
-          download: DownloadLink
-        })
-      })
-    } else {
-      if (options.clearTable) clearTable('No results.')
+  if (data[0]) {
+    if (ViewLast.name === data[0].t && ViewLast.uri !== RequestURL) {
+      alert('End of results! There is no more data to append.')
+      return
     }
-  })
+    ViewLast = {
+      name: data[0].t,
+      uri: RequestURL
+    }
+
+    data.forEach(function(torrent) {
+      const TorrentName = torrent.t
+      const Resolution = TorrentName.match(ResolutionPattern) || 'Not recognized'
+      const DownloadLink = '<a href="' + OriginalURL + torrent.a + '">Download</a>'
+
+      appendTable({
+        torrent: TorrentName,
+        resolution: Resolution,
+        download: DownloadLink
+      })
+    })
+  } else {
+    if (options.clearTable) clearTable('No results.')
+  }
 }
 
 function rebuildList(options) {
