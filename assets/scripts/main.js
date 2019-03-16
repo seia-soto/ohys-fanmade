@@ -96,7 +96,7 @@ function makeList(options) {
   const data = JSON.parse(buffer)
 
   if (data[0]) {
-    clearTable()
+    if (options.clearTable) clearTable()
 
     if (ViewLast.name === data[0].t && ViewLast.uri !== RequestURL) {
       alert('End of results! There is no more data to append.')
