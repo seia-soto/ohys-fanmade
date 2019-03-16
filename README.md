@@ -29,7 +29,7 @@ All is latest.
 | Browser/Task      | Search         | NightMode      | Cache control  |
 | :-------------    | :------------- | :------------- | :------------- |
 | Chrome            | available      | available      | available      |
-| Internet Explorer | unsupported*   | *              | *              |
-| Safari            | available      | avaialble      | unavailable    |
+| Internet Explorer | available      | available      | available      |
+| Safari            | available      | available      | unavailable    |
 | Edge              | available      | available      | available      |
 | Naver Whale       | available      | available      | available      |
