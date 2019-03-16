@@ -7,6 +7,7 @@ The fanmade site of Ohys-Raws.
 - Search uploaded raws and print it as list.
 - Download all torrent files from list.
 - See resolution of uploaded raw at list.
+- Search with resolution option. (beta)
 
 ## Adaptation
 
@@ -30,6 +31,6 @@ All is latest.
 | :-------------    | :------------- | :------------- | :------------- |
 | Chrome            | available      | available      | available      |
 | Internet Explorer | available      | available      | available      |
-| Safari            | available      | available      | unavailable    |
+| Safari            | available      | available      | available      |
 | Edge              | available      | available      | available      |
 | Naver Whale       | available      | available      | available      |

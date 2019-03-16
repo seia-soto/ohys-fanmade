@@ -1,11 +1,8 @@
-const BaseURL = 'https://app.seia.io/Ohys-Fanmade/'
+const BaseURL = 'https://ohys.seia.io/'
 const OriginalURL = 'https://torrents.ohys.net/t/'
-
-const ResolutionPattern = /\d{3,4}x\d{3,4}/
 
 let ViewList = 'new'
 let ViewPage = 0
-let ViewLast = { name: '', uri: '' }
 let ViewMode = 1
 
 function setCookie(name, value, days) {
@@ -76,60 +73,47 @@ function requestData(url) {
   }
 }
 
+function makeRequestURI(options) {
+  let RequestURL = BaseURL + 'json.php?' +
+    'dir=' + options.dir + '&' +
+    'p=' + options.p
+
+  if (options.q !== '') RequestURL += '&q=' + options.q
+  return RequestURL
+}
+
 function makeList(options) {
-  const SearchInput = document.querySelector('#SearchInput')
-  const DirSelector = document.querySelector('#DirSelector')
-
-  if (DirSelector.value !== ViewList) {
-    ViewList = DirSelector.value
-    ViewPage = 0
-  }
-
-  let RequestURL =
-    BaseURL + 'json.php?' +
-    'dir=' + (DirSelector.value || ViewList) +
-    '&p=' + ViewPage
-  if (options.includeInput && SearchInput.value !== '') RequestURL += ('&q=' + SearchInput.value)
-  if (options.clearTable) clearTable('Loading...')
+  const LoadmoreButton = document.querySelector('#LoadmoreButton')
+  const ResolutionSelector = document.querySelector('#ResolutionSelector')
+  const RequestURL = makeRequestURI({
+    dir: document.querySelector('#DirSelector').value,
+    p: ViewPage,
+    q: document.querySelector('#SearchInput').value
+  })
+  const ResolutionPatturn = new RegExp(ResolutionSelector.value)
 
   const buffer = requestData(RequestURL)
   const data = JSON.parse(buffer)
 
-  if (data[0]) {
-    if (options.clearTable) clearTable()
+  if (options.clearTable) clearTable('')
+  if (data.length < 30) {
+    LoadmoreButton.style.display = 'none'
+  } else {
+    LoadmoreButton.style.display = ''
+  }
 
-    if (ViewLast.name === data[0].t && ViewLast.uri !== RequestURL) {
-      alert('End of results! There is no more data to append.')
-      return
-    }
-    ViewLast = {
-      name: data[0].t,
-      uri: RequestURL
-    }
+  data.forEach(function(torrent) {
+    const TorrentName = torrent.t
+    const Resolution = TorrentName.match(ResolutionPatturn)
+    const DownloadLink = '<a href="' + OriginalURL + torrent.a + '">Download</a>'
 
-    data.forEach(function(torrent) {
-      const TorrentName = torrent.t
-      const Resolution = TorrentName.match(ResolutionPattern) || 'Not recognized'
-      const DownloadLink = '<a href="' + OriginalURL + torrent.a + '">Download</a>'
-
+    if (Resolution !== null) {
       appendTable({
         torrent: TorrentName,
         resolution: Resolution,
         download: DownloadLink
       })
-    })
-  } else {
-    if (options.clearTable) clearTable('No results.')
-  }
-}
-
-function rebuildList(options) {
-  ViewList = options.ViewList || ViewList
-  ViewPage = options.ViewPage || ViewPage
-
-  makeList({
-    includeInput: false,
-    clearTable: true
+    }
   })
 }
 

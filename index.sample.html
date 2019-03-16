@@ -36,10 +36,17 @@
     </header>
     <article id="fullAppFrame" class="container">
       <div class="row">
-        <div class="seven columns">
+        <div class="six columns">
           <input id="SearchInput" class="u-full-width" type="text" placeholder="Search torrents.." onkeypress="if (event.keyCode == 13) { ViewPage = 0; makeList({ includeInput: true, clearTable: true }) }">
         </div>
-        <div class="three columns">
+        <div class="two columns">
+          <select id="ResolutionSelector" class="u-full-width">
+            <option value="\d{3,4}x\d{3,4}">All resolution</option>
+            <option value="1920x1080">1080p (FHD)</option>
+            <option value="1280x720">720p (HD)</option>
+          </select>
+        </div>
+        <div class="two columns">
           <select id="DirSelector" class="u-full-width">
             <option value="new">New</option>
             <option value="old16">2016</option>
@@ -65,9 +72,7 @@
           </tbody>
         </table>
       </div>
-      <div class="container">
-        <input id="LoadmoreButton" class="u-full-width" type="button" value="Load more" onclick="ViewPage++; makeList({ includeInput: true, clearTable: false })">
-      </div>
+      <input id="LoadmoreButton" class="u-full-width" type="button" value="Load more" onclick="ViewPage++; makeList({ includeInput: true, clearTable: false })">
     </article>
 
     <script src="assets/scripts/main.js" charset="utf-8"></script>
