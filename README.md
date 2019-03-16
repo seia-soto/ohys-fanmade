@@ -24,4 +24,12 @@ Included JavaScript and CSS both have minified version.
 
 ## Browser accessibility
 
-Preparing
+All is latest.
+
+| Browser/Task      | Search         | NightMode      | Cache control  |
+| :-------------    | :------------- | :------------- | :------------- |
+| Chrome            | available      | available      | available      |
+| Internet Explorer | unsupported*   | *              | *              |
+| Safari            | available      | avaialble      | unavailable    |
+| Edge              | available      | available      | available      |
+| Naver Whale       | available      | available      | available      |
