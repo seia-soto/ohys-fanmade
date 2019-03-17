@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="root">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130620056-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-130620056-4');
+    </script>
+
+    <meta charset="utf-8">
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compartible">
+    <title>Ohys-Raws</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no">
+    <meta name="description" content="Fanmade site of Ohys-Raws.">
+    <meta name="keywords" content="Ohys, Raws, Ohys-Raws, Fanmade, Ohys-Raws-Fanmade">
+    <meta name="theme-color" content="#FFFFFF">
+
+    <link rel="icon" href="./assets/images/favicon.ico">
+
+    <!-- UI -->
+    <link rel="stylesheet" href="./assets/ui/semantic.css">
+    <link rel="stylesheet" href="./assets/styles/ui.css">
+    <link rel="stylesheet" href="./assets/styles/main.css">
+
+    <!-- Initialize frameworks -->
+    <script src="./assets/scripts/jquery-3.1.1.js" charset="utf-8"></script>
+    <script src="./assets/ui/semantic.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="ui right sidebar inverted vertical menu">
+      <a class="item" onclick="downloadList()">Download all*</a>
+      <div class="item">
+        <div class="header">Search options</div>
+        <br>
+
+        <!-- Year selection -->
+        from
+        <div id="dirSelector" class="ui dropdown">
+          <div class="text">2019 (New)</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item">2019 (New)</div>
+            <div class="item">2018</div>
+            <div class="item">2017</div>
+            <div class="item">2016</div>
+          </div>
+        </div>
+        <br><br>
+
+        <!-- Resolution selection -->
+        with
+        <div id="resolutionSelector" class="ui dropdown">
+          <div class="text">all resolution</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item">all resolution</div>
+            <div class="item">1080p (FHD)</div>
+            <div class="item">720p (HD)</div>
+            <div class="item">576p (DVD)</div>
+            <div class="item">480p (SD)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Site content -->
+    <div class="pusher">
+      <header class="ui main text container">
+        <h2 class="ui text header">
+          <span class="versus" onclick="location.href='./'">Ohys-Fanmade</span>
+        </h2>
+        <p>
+          Fanmade of Ohys-Raws, this porject is opensource project on <a href="https://github.com/Seia-Soto/Ohys-Fanmade">GitHub</a>.
+          <br>You can also;
+        </p>
+        <!-- Pinned items -->
+        <div class="ui list">
+          <div class="item">
+            <a class="header" href="https://github.com/Seia-Soto/Ohys-Fanmade/projects">Feedback</a>
+            <div class="description">
+              Feedbacks could be reported at <a href="https://github.com/Seia-Soto/Ohys-Fanmade/projects">here</a>,
+              but don't post security issues there, just <a href="mailto:seia@outlook.kr">email to me</a>.
+            </div>
+          </div>
+          <div class="item">
+            <p class="header">Links</p>
+            <div class="description">
+              <a href="https://discord.gg/EUvzwzx">Ohys-Raws Discord</a> |
+              <a href="https://ohys.seia.io/mailto:ohyongslck@gmail.com">Mail to Ohys-Raws</a> |
+              <a href="https://torrents.ohys.net/t/rss.php?dir=new">Get RSS</a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Navigation -->
+      <div class="ui borderless main menu">
+        <div class="ui container">
+          <div class="header item" href="./">
+            <img class="logo" src="./assets/images/favicon.ico">
+            Ohys-Raws
+          </div>
+          <!-- Search input -->
+          <div class="ui icon right input item" data-inverted="" data-tooltip="Tap bars icon to set advanced search options and functions" data-position="top left">
+            <input id="searchInput" type="text" placeholder="Search..." onkeypress="if (event.keyCode == 13) { ViewPage = 0; makeList() }">
+            <i onclick="toggleSidebar()" class="circular bars link icon"></i>
+          </div>
+        </div>
+      </div>
+      <!-- Result table -->
+      <div class="ui container">
+        <div id="resultList" class="ui list">
+          <!-- Item
+          <div class="item">
+            <div class="header">Torrent Name</div>
+            <a href="#">Download</a>
+          </div>
+          -->
+        </div>
+        <button id="AppendButton" class="fluid ui primary button" onclick="ViewPage++; makeList()">Load more</button>
+      </div>
+      <!-- Footer -->
+      <footer class="ui inverted vertical footer segment">
+        <div class="ui center aligned container">
+          <div class="ui stackable inverted divided grid">
+            <div class="four wide column">
+              <h4 class="ui inverted header">Ohys-Raws</h4>
+              <div class="ui inverted link list">
+                <a class="item" href="https://discord.gg/EUvzwzx">Ohys-Raws Discord</a>
+                <a class="item" href="https://ohys.seia.io/mailto:ohyongslck@gmail.com">Mail to Ohys-Raws</a>
+                <a class="item" href="https://torrents.ohys.net/t/rss.php?dir=new">Get RSS</a>
+              </div>
+            </div>
+            <div class="four wide column">
+              <h4 class="ui inverted header">Seia-Soto</h4>
+              <div class="ui inverted link list">
+                <a class="item" href="https://github.com/Seia-Soto">GitHub</a>
+                <a class="item" href="https://twitter.com/Seia_Soto">Twitter</a>
+              </div>
+            </div>
+            <div class="eight wide column">
+              <h4 class="ui inverted header">@Seia-Soto/Ohys-Fanmade</h4>
+              <p>
+                Fanmade site of Ohys.
+              </p>
+            </div>
+          </div>
+          <div class="ui inverted section divider"></div>
+          <img class="ui centered mini image" src="./assets/images/author.jpg" />
+          <div class="ui horizontal inverted small divided link list">
+            <a class="item" href="https://raws.ohys.net/t">Back to Ohys</a>
+            <a class="item">We are preparing policies</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./assets/scripts/ui.js" charset="utf-8"></script>
+    <script src="./assets/scripts/main.js" charset="utf-8"></script>
+  </body>
+</html>
