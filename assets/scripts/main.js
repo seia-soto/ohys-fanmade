@@ -8,10 +8,10 @@ const DirectoryPatturnScope = {
 }
 const ResolutionPatturnScope = {
   'all resolution': /\d{3,4}x\d{3,4}/,
-  '1080p (FHD)': /1920x1080/,
-  '720p (HD)': /1280x720/,
-  '576p (DVD)': /1024x576/,
-  '480p (SD)': /640×480p/
+  '1080P (FHD)': /1920x1080/,
+  '720P (HD)': /1280x720/,
+  '576P (DVD)': /1024x576/,
+  '480P (SD)': /640×480p/
 }
 
 let ViewPage = 0
@@ -114,7 +114,7 @@ function makeList() {
       document.querySelector('#AppendButton').style.visibility = 'hidden'
     }
     data.forEach(function(item) {
-      if (item.t.match(ResolutionPatturnScope[$('#resolutionSelector').dropdown('get value') || 'all resolution'])) {
+      if (item.t.match(ResolutionPatturnScope[$('#resolutionSelector').dropdown('get value').toUpperCase() || 'all resolution'])) {
         appendList({
           name: item.t,
           resolution: item.t.match(ResolutionPatturnScope['all resolution']),
