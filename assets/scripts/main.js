@@ -1,9 +1,26 @@
 const BaseURL = 'https://ohys.seia.io/'
 const OriginalURL = 'https://torrents.ohys.net/t/'
+const DirectoryPatturnScope = {
+  '2019 (New)': 'new',
+  '2018': 'old18',
+  '2017': 'old17',
+  '2016': 'old16'
+}
+const ResolutionPatturnScope = {
+  'all resolution': /\d{3,4}x\d{3,4}/,
+  '1080p (FHD)': /1920x1080/,
+  '720p (HD)': /1280x720/,
+  '576p (DVD)': /1024x576/,
+  '480p (SD)': /640×480p/
+}
 
-let ViewList = 'new'
 let ViewPage = 0
-let ViewMode = 1
+
+function toggleSidebar() {
+  $('.ui.sidebar')
+    .sidebar('toggle')
+  ;
+}
 
 function setCookie(name, value, days) {
   let expires = ''
@@ -36,25 +53,31 @@ function eraseCookie(name) {
   document.cookie = name + '=; Max-Age=-99999999;'
 }
 
-function appendTable(toAppend) {
-  const TorrentTable = document.querySelector('#TorrentTable')
+function appendList(item) {
+  const List = $('#resultList')
 
-  let newRow = TorrentTable.insertRow(TorrentTable.rows.length)
-  let newCells = {
-    torrent: newRow.insertCell(0),
-    resolution: newRow.insertCell(1),
-    download: newRow.insertCell(2)
-  }
+  const Outer = $('<div/>', {
+    class: 'item'
+  })
+  const Inner = $('<div/>', {
+    class: 'header',
+    text: item.name
+  })
+  const Link = $('<a/>', {
+    href: item.link,
+    text: 'Download ' + '(' + item.resolution + ')'
+  })
 
-  newCells.torrent.innerHTML = toAppend.torrent
-  newCells.resolution.innerHTML = toAppend.resolution
-  newCells.download.innerHTML = toAppend.download
+  Inner.add(Link).appendTo(Outer.appendTo(List))
 }
 
-function clearTable(toShow) {
-  const TorrentTable = document.querySelector('#TorrentTable')
+function makeRequestURI(options) {
+  let RequestURL = BaseURL + 'json.php?' +
+    'dir=' + options.dir + '&' +
+    'p=' + options.p
 
-  TorrentTable.innerHTML = toShow || ''
+  if (options.q !== '') RequestURL += '&q=' + options.q
+  return RequestURL
 }
 
 function requestData(url) {
@@ -73,91 +96,55 @@ function requestData(url) {
   }
 }
 
-function makeRequestURI(options) {
-  let RequestURL = BaseURL + 'json.php?' +
-    'dir=' + options.dir + '&' +
-    'p=' + options.p
+function makeList() {
+  const requestURI = makeRequestURI({
+    dir: DirectoryPatturnScope[$('#dirSelector').dropdown('get value') || '2019 (New)'],
+    p: ViewPage,
+    q: document.querySelector('#searchInput').value
+  })
+  const data = JSON.parse(requestData(requestURI))
 
-  if (options.q !== '') RequestURL += '&q=' + options.q
-  return RequestURL
+  document.querySelector('#AppendButton').style.visibility = 'visible'
+
+  if (ViewPage === 0) {
+    clearList()
+  }
+  if (data[0]) {
+    if (data.length < 30) {
+      document.querySelector('#AppendButton').style.visibility = 'hidden'
+    }
+    data.forEach(function(item) {
+      if (item.t.match(ResolutionPatturnScope[$('#resolutionSelector').dropdown('get value') || 'all resolution'])) {
+        appendList({
+          name: item.t,
+          resolution: item.t.match(ResolutionPatturnScope['all resolution']),
+          link: OriginalURL + item.a
+        })
+      }
+    })
+  } else {
+    clearList('No result')
+
+    document.querySelector('#AppendButton').style.visibility = 'hidden'
+  }
 }
 
-function makeList(options) {
-  const LoadmoreButton = document.querySelector('#LoadmoreButton')
-  const ResolutionSelector = document.querySelector('#ResolutionSelector')
-  const RequestURL = makeRequestURI({
-    dir: document.querySelector('#DirSelector').value,
-    p: ViewPage,
-    q: document.querySelector('#SearchInput').value
-  })
-  const ResolutionPatturn = new RegExp(ResolutionSelector.value)
+function clearList(asText) {
+  const List = $('#resultList')
 
-  const buffer = requestData(RequestURL)
-  const data = JSON.parse(buffer)
-
-  if (options.clearTable) clearTable('')
-  if (data.length < 30) {
-    LoadmoreButton.style.display = 'none'
-  } else {
-    LoadmoreButton.style.display = ''
-  }
-
-  data.forEach(function(torrent) {
-    const TorrentName = torrent.t
-    const Resolution = TorrentName.match(ResolutionPatturn)
-    const DownloadLink = '<a href="' + OriginalURL + torrent.a + '">Download</a>'
-
-    if (Resolution !== null) {
-      appendTable({
-        torrent: TorrentName,
-        resolution: Resolution,
-        download: DownloadLink
-      })
-    }
-  })
+  List.text(asText || '')
 }
 
 function downloadList() {
-  Object.values(TorrentTable.rows).forEach(function(row, i) {
-    setTimeout(function() {
-      window.location = row.querySelector('a').href
-    }, 900 + i * 900)
-  })
-}
+  const Links = $('#resultList a')
 
-function switchTheme() {
-  const Body = document.querySelector('body')
-  const App = document.querySelector('#app')
-
-  const SearchButton = document.querySelector('#SearchButton')
-  const LoadmoreButton = document.querySelector('#LoadmoreButton')
-
-  if (ViewMode == 0) {
-    Body.style['background-color'] = '#232b2b'
-    App.style.color = 'lightgrey'
-
-    SearchButton.style.color = 'lightgrey'
-    LoadmoreButton.style.color = 'lightgrey'
-
-    ViewMode = 1
-  } else {
-    Body.style['background-color'] = 'white'
-    App.style.color = 'black'
-
-    SearchButton.style.color = 'black'
-    LoadmoreButton.style.color = 'black'
-
-    ViewMode = 0
+  for (var i = 0; i < Links.length; i++) {
+    setTimeout(function(el) {
+      window.location = el.href
+    }, 900 + i * 900, Links[i])
   }
 }
 
-function setMode() {
-  switchTheme()
-  eraseCookie('nightmode')
-
-  if (ViewMode == 0) {
-    setCookie('nightmode', '1', 7)
-  } else {
-    setCookie('nightmode', '0', 7)
-  }
-}
+$(document).ready(function () {
+  makeList()
+})
