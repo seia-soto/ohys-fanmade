@@ -97,6 +97,10 @@ function requestData(url) {
 }
 
 function makeList() {
+  const appendButton = document.querySelector('#AppendButton')
+
+  messageReset()
+
   const requestURI = makeRequestURI({
     dir: DirectoryPatturnScope[$('#dirSelector').dropdown('get value') || '2019 (New)'],
     p: ViewPage,
@@ -104,14 +108,14 @@ function makeList() {
   })
   const data = JSON.parse(requestData(requestURI))
 
-  document.querySelector('#AppendButton').style.visibility = 'visible'
-
   if (ViewPage === 0) {
     clearList()
   }
   if (data[0]) {
     if (data.length < 30) {
-      document.querySelector('#AppendButton').style.visibility = 'hidden'
+      appendButton.style.display = 'none'
+    } else {
+      appendButton.style.display = ''
     }
     data.forEach(function(item) {
       if (item.t.match(ResolutionPatturnScope[$('#resolutionSelector').dropdown('get value').toUpperCase() || 'all resolution'])) {
@@ -122,10 +126,9 @@ function makeList() {
         })
       }
     })
+    messageSuccess()
   } else {
-    clearList('No result')
-
-    document.querySelector('#AppendButton').style.visibility = 'hidden'
+    messageError('No torrent found with search options.')
   }
 }
 
@@ -145,6 +148,54 @@ function downloadList() {
   }
 }
 
+function messageSuccess() {
+  const taskMessage = document.querySelector('#taskMessage')
+
+  taskMessage.style.display = 'none'
+}
+
+function messageError(context) {
+  const appendButton = document.querySelector('#AppendButton')
+  const taskMessage = document.querySelector('#taskMessage')
+
+  appendButton.style.display = 'none'
+
+  taskMessage.classList.remove('info')
+  taskMessage.classList.add('error')
+
+  taskMessage.querySelector('i').classList.remove('notched')
+  taskMessage.querySelector('i').classList.remove('loading')
+  taskMessage.querySelector('i').classList.add('exclamation')
+
+  taskMessage.querySelector('.header').innerHTML = 'Error occured'
+  taskMessage.querySelector('p').innerHTML = context || 'There is no torrent to show up, if your connection to server lost, just refresh this site to reload.'
+
+  taskMessage.style.display = ''
+}
+
+function messageReset(context) {
+  const appendButton = document.querySelector('#AppendButton')
+  const taskMessage = document.querySelector('#taskMessage')
+
+  appendButton.style.display = 'none'
+
+  taskMessage.classList.remove('error')
+  taskMessage.classList.add('info')
+
+  taskMessage.querySelector('i').classList.remove('exclamation')
+  taskMessage.querySelector('i').classList.add('notched')
+  taskMessage.querySelector('i').classList.add('loading')
+
+  taskMessage.querySelector('.header').innerHTML = 'Just one second'
+  taskMessage.querySelector('p').innerHTML = context || 'We\'re fetching that content for you.'
+
+  taskMessage.style.display = ''
+}
+
 $(document).ready(function () {
-  makeList()
+  try {
+    makeList()
+  } catch (error) {
+    messageError('Unknown connection error occured between you and server, please refresh site to reload.')
+  }
 })

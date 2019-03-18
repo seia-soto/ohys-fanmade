@@ -67,6 +67,7 @@
           </div>
         </div>
       </div>
+      <a class="item" onclick="ViewPage = 0; makeList(); toggleSidebar();">Search</a>
     </div>
     <!-- Site content -->
     <div class="pusher">
@@ -97,32 +98,46 @@
           </div>
         </div>
       </header>
-      <!-- Navigation -->
-      <div class="ui borderless main menu">
+      <article id="app">
+        <!-- Navigation -->
+        <div class="ui borderless main menu">
+          <div class="ui container">
+            <div class="header item" href="./" onclick="location.href='#app'">
+              <img class="logo" src="./assets/images/favicon.ico">
+              Ohys-Raws
+            </div>
+            <!-- Search input -->
+            <div class="ui icon right input item" data-inverted="" data-tooltip="Tap bars icon to set advanced search options and functions" data-position="top left">
+              <input id="searchInput" type="text" placeholder="Search..." onkeypress="if (event.keyCode == 13) { ViewPage = 0; makeList() }">
+              <i onclick="toggleSidebar()" class="circular bars link icon"></i>
+            </div>
+          </div>
+        </div>
+        <!-- Result table -->
         <div class="ui container">
-          <div class="header item" href="./">
-            <img class="logo" src="./assets/images/favicon.ico">
-            Ohys-Raws
+          <div id="resultList" class="ui list">
+            <!-- Item
+            <div class="item">
+              <div class="header">Torrent Name</div>
+              <a href="#">Download</a>
+            </div>
+            -->
           </div>
-          <!-- Search input -->
-          <div class="ui icon right input item" data-inverted="" data-tooltip="Tap bars icon to set advanced search options and functions" data-position="top left">
-            <input id="searchInput" type="text" placeholder="Search..." onkeypress="if (event.keyCode == 13) { ViewPage = 0; makeList() }">
-            <i onclick="toggleSidebar()" class="circular bars link icon"></i>
+          <!-- Task message -->
+          <div class="ui container">
+            <div id="taskMessage" class="ui icon info message">
+              <i class="notched circle loading icon"></i>
+              <div class="content">
+                <div class="header">
+                  Just one second
+                </div>
+                <p>We're fetching that content for you.</p>
+              </div>
+            </div>
           </div>
+          <button id="AppendButton" class="fluid ui primary button" onclick="ViewPage++; makeList()">Load more</button>
         </div>
-      </div>
-      <!-- Result table -->
-      <div class="ui container">
-        <div id="resultList" class="ui list">
-          <!-- Item
-          <div class="item">
-            <div class="header">Torrent Name</div>
-            <a href="#">Download</a>
-          </div>
-          -->
-        </div>
-        <button id="AppendButton" class="fluid ui primary button" onclick="ViewPage++; makeList()">Load more</button>
-      </div>
+      </article>
       <!-- Footer -->
       <footer class="ui inverted vertical footer segment">
         <div class="ui center aligned container">
