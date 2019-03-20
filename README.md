@@ -20,6 +20,8 @@ const BaseURL = 'https://app.seia.io/Ohys-Fanmade/'
 const OriginalURL = 'https://torrents.ohys.net/t/'
 ```
 
+Also migration of `port.php`(no.php) is needed.
+
 ## Browser accessibility
 
 All is latest.

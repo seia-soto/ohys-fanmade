@@ -1,7 +1,7 @@
 const BaseURL = 'https://ohys.seia.io/'
-const OriginalURL = 'https://torrents.ohys.net/t/'
+const OriginalURL = 'https://torrents.ohys.net/'
 const DirectoryPatturnScope = {
-  '2019 (New)': 'new',
+  '2019 (NEW)': 'new',
   '2018': 'old18',
   '2017': 'old17',
   '2016': 'old16'
@@ -16,9 +16,9 @@ const ResolutionPatturnScope = {
 
 let ViewPage = 0
 
-function toggleSidebar() {
-  $('.ui.sidebar')
-    .sidebar('toggle')
+function toggleModal() {
+  $('.ui.modal')
+    .modal('toggle')
   ;
 }
 
@@ -84,9 +84,7 @@ function requestData(url) {
   let request = new XMLHttpRequest()
 
   request.open('GET', url, false)
-  request.setRequestHeader(
-    'Content-Type', 'application/x-www-form-urlencoded; Charset=utf-8'
-  )
+  request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; Charset=utf-8')
 
   request.send(null)
   if (request.readyState === 4  && request.status === 200) {
@@ -102,7 +100,7 @@ function makeList() {
   messageReset()
 
   const requestURI = makeRequestURI({
-    dir: DirectoryPatturnScope[$('#dirSelector').dropdown('get value') || '2019 (New)'],
+    dir: DirectoryPatturnScope[$('#dirSelector').dropdown('get value').toUpperCase() || '2019 (NEW)'],
     p: ViewPage,
     q: document.querySelector('#searchInput').value
   })
@@ -139,13 +137,48 @@ function clearList(asText) {
 }
 
 function downloadList() {
-  const Links = $('#resultList a')
+  const LinksMap = document.querySelector('#resultList').getElementsByTagName('a')
+  const Button = document.querySelector('#downloadButton')
 
-  for (var i = 0; i < Links.length; i++) {
-    setTimeout(function(el) {
-      window.location = el.href
-    }, 900 + i * 900, Links[i])
-  }
+  Button.disabled = true
+  Button.innerHTML = 'Preparing to download...'
+
+  const Compressed = new JSZip()
+
+  let Links = Object.keys(LinksMap).map(function(k) {
+    return LinksMap[k]
+  })
+
+  Links.forEach(function(el, i) {
+    setTimeout(function() {
+      Button.innerHTML = 'Downloading ' + (i + 1) + ' of ' + Links.length + ' torrents...'
+
+      const File = {
+        name: decodeURIComponent(el.href.split('/')[el.href.split('/').length - 1]),
+        context: requestData(BaseURL + 'port.php?to=' + encodeURIComponent(el.href.replace(OriginalURL, '/t/')))
+      }
+      Compressed.file(File.name, File.context)
+
+      if (i === Links.length - 1) {
+        Button.innerHTML = 'Compressing files...'
+
+        const Blob = Compressed.generate({ type: 'blob' })
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(Blob, 'ohys-fanmade-downloads-' + new Date().toUTCString() + '.zip')
+        } else {
+          let a = document.createElement('a')
+
+          a.style = 'display: none'
+          a.href = window.URL.createObjectURL(Blob)
+          a.download = 'ohys-fanmade-downloads-' + new Date().toUTCString() + '.zip'
+          a.click()
+        }
+
+        Button.innerHTML = 'Download list*'
+        Button.disabled = false
+      }
+    }, 1000 + i * 1000)
+  })
 }
 
 function messageSuccess() {
@@ -154,14 +187,14 @@ function messageSuccess() {
   taskMessage.style.display = 'none'
 }
 
-function messageError(context) {
+function messageError(context, icon) {
   const appendButton = document.querySelector('#AppendButton')
   const taskMessage = document.querySelector('#taskMessage')
 
   appendButton.style.display = 'none'
 
   taskMessage.classList.remove('info')
-  taskMessage.classList.add('error')
+  taskMessage.classList.add(icon || 'error')
 
   taskMessage.querySelector('i').classList.remove('notched')
   taskMessage.querySelector('i').classList.remove('loading')
@@ -196,6 +229,6 @@ $(document).ready(function () {
   try {
     makeList()
   } catch (error) {
-    messageError('Unknown connection error occured between you and server, please refresh site to reload.')
+    messageError('Unknown connection error occured between you and server, please refresh site to reload.', 'server')
   }
 })
