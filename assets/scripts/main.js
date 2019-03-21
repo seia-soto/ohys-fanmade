@@ -120,7 +120,7 @@ function makeList() {
         appendList({
           name: item.t,
           resolution: item.t.match(ResolutionPatturnScope['all resolution']),
-          link: OriginalURL + item.a
+          link: OriginalURL + '/t/' + item.a
         })
       }
     })
