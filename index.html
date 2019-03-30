@@ -10,16 +10,16 @@
     <meta name="keywords" content="Ohys, Raws, Ohys-Raws, Fanmade, Ohys-Raws-Fanmade">
     <meta name="theme-color" content="#FFFFFF">
 
-    <link rel="icon" href="./assets/images/favicon.ico">
+    <link rel="icon" href="/assets/images/favicon.ico">
 
     <!-- UI -->
-    <link rel="stylesheet" href="./assets/ui/semantic.min.css">
-    <link rel="stylesheet" href="./assets/styles/ui.css">
-    <link rel="stylesheet" href="./assets/styles/main.css">
+    <link rel="stylesheet" href="/assets/ui/semantic.min.css">
+    <link rel="stylesheet" href="/assets/styles/ui.css">
+    <link rel="stylesheet" href="/assets/styles/main.css">
 
     <!-- Initialize frameworks -->
-    <script src="./assets/scripts/jquery-3.1.1.min.js" charset="utf-8"></script>
-    <script src="./assets/ui/semantic.min.js" charset="utf-8"></script>
+    <script src="/assets/scripts/jquery-3.1.1.min.js" charset="utf-8"></script>
+    <script src="/assets/ui/semantic.min.js" charset="utf-8"></script>
   </head>
   <body>
     <!-- Settings modal -->
@@ -69,7 +69,7 @@
     <!-- Site content -->
     <header class="ui main text container">
       <h2 class="ui text header">
-        <span class="versus" onclick="location.href='./'">Ohys-Fanmade</span>
+        <span class="versus" onclick="location.href='/'">Ohys-Fanmade</span>
       </h2>
       <p>
         Fanmade of Ohys-Raws, this porject is opensource project on <a href="https://github.com/Seia-Soto/Ohys-Fanmade">GitHub</a>.
@@ -109,13 +109,13 @@
       <!-- Navigation -->
       <div class="ui borderless main menu">
         <div class="ui container">
-          <div class="header item" href="./" onclick="location.href='#app'">
-            <img class="logo" src="./assets/images/favicon.ico">
+          <div class="header item" onclick="location.href='#app'">
+            <img class="logo" src="/assets/images/favicon.ico">
             Ohys-Raws
           </div>
           <!-- Search input -->
-          <div class="ui icon right input item" data-inverted="" data-tooltip="Tap bars icon to set advanced search options and functions" data-position="top left">
-            <input id="searchInput" type="text" placeholder="Search..." onkeypress="if (event.keyCode == 13) { ViewPage = 0; makeList() }">
+          <div class="ui icon right input item">
+            <input id="searchInput" type="text" placeholder="Search..." onkeypress="if (event.keyCode == 13) { searchTorrents() }">
             <i onclick="toggleModal()" class="circular bars link icon"></i>
           </div>
         </div>
@@ -173,7 +173,7 @@
           </div>
         </div>
         <div class="ui inverted section divider"></div>
-        <img class="ui centered mini image" src="./assets/images/author.jpg" />
+        <img class="ui centered mini image" src="/assets/images/author.jpg" />
         <div class="ui horizontal inverted small divided link list">
           <a class="item" href="https://raws.ohys.net/t">Back to Ohys</a>
           <a class="item">We are preparing policies</a>
@@ -182,8 +182,8 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="./assets/scripts/ui.js" charset="utf-8"></script>
-    <script src="./assets/zlib/jszip.min.js" charset="utf-8"></script>
-    <script src="./assets/scripts/main.js" charset="utf-8"></script>
+    <script src="/assets/scripts/ui.js" charset="utf-8"></script>
+    <script src="/assets/zlib/jszip.min.js" charset="utf-8"></script>
+    <script src="/assets/scripts/main.js" charset="utf-8"></script>
   </body>
 </html>

@@ -71,6 +71,24 @@ function appendList(item) {
   Inner.add(Link).appendTo(Outer.appendTo(List))
 }
 
+function appendList(item) {
+  const List = $('#resultList')
+
+  const Outer = $('<div/>', {
+    class: 'item'
+  })
+  const Inner = $('<div/>', {
+    class: 'header',
+    text: item.name
+  })
+  const Link = $('<a/>', {
+    href: item.link,
+    text: 'Download ' + '(' + item.resolution + ')'
+  })
+
+  Inner.add(Link).appendTo(Outer.prependTo(List))
+}
+
 function makeRequestURI(options) {
   let RequestURL = BaseURL + 'json.php?' +
     'dir=' + options.dir + '&' +
@@ -96,6 +114,7 @@ function requestData(url) {
 
 function makeList() {
   const appendButton = document.querySelector('#AppendButton')
+  const downloadButton = document.querySelector('#downloadButton')
 
   messageReset()
 
@@ -115,6 +134,8 @@ function makeList() {
     } else {
       appendButton.style.display = ''
     }
+    downloadButton.style.display = ''
+
     data.forEach(function(item) {
       if (item.t.match(ResolutionPatturnScope[$('#resolutionSelector').dropdown('get value').toUpperCase() || 'all resolution'])) {
         appendList({
@@ -189,9 +210,11 @@ function messageSuccess() {
 
 function messageError(context, icon) {
   const appendButton = document.querySelector('#AppendButton')
+  const downloadButton = document.querySelector('#downloadButton')
   const taskMessage = document.querySelector('#taskMessage')
 
   appendButton.style.display = 'none'
+  downloadButton.style.display = 'none'
 
   taskMessage.classList.remove('info')
   taskMessage.classList.add(icon || 'error')
@@ -208,9 +231,11 @@ function messageError(context, icon) {
 
 function messageReset(context) {
   const appendButton = document.querySelector('#AppendButton')
+  const downloadButton = document.querySelector('#downloadButton')
   const taskMessage = document.querySelector('#taskMessage')
 
   appendButton.style.display = 'none'
+  downloadButton.style.display = 'none'
 
   taskMessage.classList.remove('error')
   taskMessage.classList.add('info')
@@ -225,10 +250,26 @@ function messageReset(context) {
   taskMessage.style.display = ''
 }
 
+function searchTorrents() {
+  ViewPage = 0
+  history.pushState('', 'Ohys-Fanmade', '/' + document.querySelector('#searchInput').value)
+
+  makeList()
+}
+
 $(document).ready(function () {
   try {
-    makeList()
+    const relativeFrom = window.location.href.replace(BaseURL, '')
+
+    if (relativeFrom) {
+      document.querySelector('#searchInput').value = relativeFrom || ''
+      makeList()
+    } else {
+      makeList()
+    }
   } catch (error) {
+    console.error(error)
+
     messageError('Unknown connection error occured between you and server, please refresh site to reload.', 'server')
   }
 })
