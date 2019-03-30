@@ -71,7 +71,7 @@ function appendList(item) {
   Inner.add(Link).appendTo(Outer.appendTo(List))
 }
 
-function appendList(item) {
+function prependList(item) {
   const List = $('#resultList')
 
   const Outer = $('<div/>', {
