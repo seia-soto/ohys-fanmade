@@ -262,7 +262,7 @@ $(document).ready(function () {
     const relativeFrom = window.location.href.replace(BaseURL, '')
 
     if (relativeFrom) {
-      document.querySelector('#searchInput').value = relativeFrom || ''
+      document.querySelector('#searchInput').value = decodeURIComponent(relativeFrom) || ''
       makeList()
     } else {
       makeList()
