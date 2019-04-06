@@ -17,6 +17,8 @@ const Translations = {
   en: {
     not_found: 'No torrent found with search options.',
 
+    download: 'Download ',
+
     preparing_download: 'Preparing to download...',
 
     downloading: 'Downloading ',
@@ -32,6 +34,8 @@ const Translations = {
   },
   ko: {
     not_found: '검색 조건에 일치하는 토렌트가 없습니다.',
+
+    download: '다운로드 ',
 
     preparing_download: '다운로드 준비 중...',
 
@@ -99,7 +103,7 @@ function appendList(item) {
   })
   const Link = $('<a/>', {
     href: item.link,
-    text: 'Download ' + '(' + item.resolution + ')'
+    text: (Translations[language].download || 'Download ') + '(' + item.resolution + ')'
   })
 
   Inner.add(Link).appendTo(Outer.appendTo(List))
