@@ -49,6 +49,24 @@ const Translations = {
 
     just_one_second: '잠시만 기다려주세요',
     error_occured: '오류 발생'
+  },
+  ja: {
+    not_found: '検索条件に一致するトレントがありません。',
+
+    download: 'ダウンロード ',
+
+    preparing_download: 'ダウンロード準備中...',
+
+    downloading: '現在 ',
+    of: '個のトレントダウンロード, ',
+    torrents: '個のキュー',
+
+    compressing_files: 'ファイル圧縮中...',
+
+    download_list: 'リストダウンロード*',
+
+    just_one_second: 'しばらくお待ちください',
+    error_occured: 'エラー発生'
   }
 }
 
