@@ -10,6 +10,9 @@
 
       gtag('config', 'UA-130620056-4');
     </script>
+    <script type="text/javascript">
+      const language = 'en'
+    </script>
 
     <meta charset="utf-8">
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compartible">
@@ -138,12 +141,22 @@
             <i class="notched circle loading icon"></i>
             <div class="content">
               <div class="header">
-                Detecting language
+                Just one second
               </div>
-              <p>We're detecting language you're using, please wait for a second.</p>
+              <p>We're fetching that content for you.</p>
             </div>
           </div>
         </div>
+        <div id="resultList" class="ui list">
+          <!-- Item
+          <div class="item">
+            <div class="header">Torrent Name</div>
+            <a href="#">Download</a>
+          </div>
+          -->
+        </div>
+        <button id="AppendButton" class="fluid ui primary button" onclick="ViewPage++; makeList();">Load more</button>
+        <button id="downloadButton" class="fluid ui secondary button" onclick="downloadList();">Download list*</button>
       </div>
     </article>
     <!-- Footer -->
@@ -182,8 +195,8 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="assets/scripts/ui.js" charset="utf-8"></script>
-    <script src="assets/zlib/jszip.min.js" charset="utf-8"></script>
-    <script src="assets/scripts/main.js" charset="utf-8"></script>
+    <script src="/assets/scripts/ui.js" charset="utf-8"></script>
+    <script src="/assets/zlib/jszip.min.js" charset="utf-8"></script>
+    <script src="/assets/scripts/index.d.js" charset="utf-8"></script>
   </body>
 </html>

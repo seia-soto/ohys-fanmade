@@ -10,13 +10,16 @@
 
       gtag('config', 'UA-130620056-4');
     </script>
+    <script type="text/javascript">
+      const language = 'ko'
+    </script>
 
     <meta charset="utf-8">
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compartible">
     <title>Ohys-Raws</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no">
-    <meta name="description" content="Fanmade site of Ohys-Raws.">
+    <meta name="description" content="Ohys-Raws의 펜메이드 사이트.">
     <meta name="keywords" content="Ohys, Raws, Ohys-Raws, Fanmade, Ohys-Raws-Fanmade">
     <meta name="theme-color" content="#FFFFFF">
 
@@ -34,15 +37,15 @@
   <body>
     <!-- Settings modal -->
     <div class="ui mini modal">
-      <div class="header">Settings</div>
+      <div class="header">설정</div>
       <div class="scrolling content">
         <p>
-          Site configuration per browser of Ohys-Fanmade.
-          Thank you for using Ohys-Fanmade.
+          브라우저마다 저장되는 Ohys-Fanmade 웹 사이트의 설정입니다.
+          Ohys-Fanmade를 사용해주셔서 감사합니다.
         </p>
         <div class="ui divider"></div>
         <!-- Directory selection -->
-        <h4>Select released year</h4>
+        <h4>출시연도 선택</h4>
         <div id="dirSelector" class="ui floating dropdown labeled search icon button">
           <i class="calendar icon"></i>
           <span class="text">2019 (New)</span>
@@ -54,7 +57,7 @@
           </div>
         </div>
         <!-- Resolution selection -->
-        <h4>Select resolution</h4>
+        <h4>해상도 선택</h4>
         <div id="resolutionSelector" class="ui floating dropdown labeled search icon button">
           <i class="file video icon"></i>
           <div class="text">all resolution</div>
@@ -69,10 +72,10 @@
       </div>
       <div class="actions">
         <button class="ui secondary button" onclick="ViewPage = 0; makeList(); toggleModal();">
-          Search now
+          지금 검색
         </button>
         <button class="ui primary button" onclick="toggleModal();">
-          Done
+          완료
         </button>
       </div>
     </div>
@@ -82,16 +85,16 @@
         <span class="versus" onclick="location.href='/'">Ohys-Fanmade</span>
       </h2>
       <p>
-        Fanmade of Ohys-Raws, this porject is opensource project on <a href="https://github.com/Seia-Soto/Ohys-Fanmade">GitHub</a>.
-        <br>You can also;
+        Ohys-Raws의 팬메이드입니다, 이 프로젝트는 <a href="https://github.com/Seia-Soto/Ohys-Fanmade">GitHub</a>에 오픈소스되어 있습니다.
+        <br>또한;
       </p>
       <div class="ui inverted segment">
         <div class="ui inverted list">
           <div class="item">
-            <a class="header" href="https://docs.google.com/forms/d/e/1FAIpQLSd665aK1a2gm3mzQEhG1RxcfDZdYvoV9cTQSyhvBTj1yONXLQ/viewform?usp=sf_link">Give me a minute!</a>
+            <a class="header" href="https://docs.google.com/forms/d/e/1FAIpQLSd665aK1a2gm3mzQEhG1RxcfDZdYvoV9cTQSyhvBTj1yONXLQ/viewform?usp=sf_link">1분을 투자하세요</a>
             <div class="description">
-              Currently I am doing one survey to improve this Fanmade website effectively.
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSd665aK1a2gm3mzQEhG1RxcfDZdYvoV9cTQSyhvBTj1yONXLQ/viewform?usp=sf_link">Let me check ></a>
+              현재 저는 이 팬메이드 사이트를 효율적으로 향상시키기 위하여 하나의 설문조사를 진행하고 있습니다.
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSd665aK1a2gm3mzQEhG1RxcfDZdYvoV9cTQSyhvBTj1yONXLQ/viewform?usp=sf_link">지금 확인하기 ></a>
             </div>
           </div>
         </div>
@@ -99,18 +102,18 @@
       <!-- Pinned items -->
       <div class="ui list">
         <div class="item">
-          <a class="header" href="https://github.com/Seia-Soto/Ohys-Fanmade/projects">Feedback</a>
+          <a class="header" href="https://github.com/Seia-Soto/Ohys-Fanmade/projects">피드백</a>
           <div class="description">
-            Feedbacks could be reported at <a href="https://github.com/Seia-Soto/Ohys-Fanmade/projects">here</a>,
-            but don't post security issues there, just <a href="mailto:seia@outlook.kr">email to me</a>.
+            피드백은 <a href="https://github.com/Seia-Soto/Ohys-Fanmade/projects">여기</a>에 제출할 수 있습니다,
+            그러나 보안 이슈는 제출하지 마세요, 그저 <a href="mailto:seia@outlook.kr">저에게 이메일을 보내주세요</a>.
           </div>
         </div>
         <div class="item">
-          <p class="header">Links</p>
+          <p class="header">링크</p>
           <div class="description">
-            <a href="https://discord.gg/EUvzwzx">Ohys-Raws Discord</a> |
-            <a href="mailto:ohyongslck@gmail.com">Mail to Ohys-Raws</a> |
-            <a href="https://torrents.ohys.net/t/rss.php?dir=new">Get RSS</a>
+            <a href="https://discord.gg/EUvzwzx">Ohys-Raws 디스코드</a> |
+            <a href="mailto:ohyongslck@gmail.com">Ohys-Raws에 메일 보내기</a> |
+            <a href="https://torrents.ohys.net/t/rss.php?dir=new">RSS</a>
           </div>
         </div>
       </div>
@@ -138,12 +141,22 @@
             <i class="notched circle loading icon"></i>
             <div class="content">
               <div class="header">
-                Detecting language
+                잠시만 기다려주세요
               </div>
-              <p>We're detecting language you're using, please wait for a second.</p>
+              <p>지금 콘텐츠를 가져오는 중입니다</p>
             </div>
           </div>
         </div>
+        <div id="resultList" class="ui list">
+          <!-- Item
+          <div class="item">
+            <div class="header">Torrent Name</div>
+            <a href="#">Download</a>
+          </div>
+          -->
+        </div>
+        <button id="AppendButton" class="fluid ui primary button" onclick="ViewPage++; makeList();">더 보기</button>
+        <button id="downloadButton" class="fluid ui secondary button" onclick="downloadList();">리스트 다운로드*</button>
       </div>
     </article>
     <!-- Footer -->
@@ -153,9 +166,9 @@
           <div class="four wide column">
             <h4 class="ui inverted header">Ohys-Raws</h4>
             <div class="ui inverted link list">
-              <a class="item" href="https://discord.gg/EUvzwzx">Ohys-Raws Discord</a>
-              <a class="item" href="mailto:ohyongslck@gmail.com">Mail to Ohys-Raws</a>
-              <a class="item" href="https://torrents.ohys.net/t/rss.php?dir=new">Get RSS</a>
+              <a class="item" href="https://discord.gg/EUvzwzx">Ohys-Raws 디스코드</a>
+              <a class="item" href="mailto:ohyongslck@gmail.com">Ohys-Raws에 메일보내기</a>
+              <a class="item" href="https://torrents.ohys.net/t/rss.php?dir=new">RSS</a>
             </div>
           </div>
           <div class="four wide column">
@@ -168,22 +181,22 @@
           <div class="eight wide column">
             <h4 class="ui inverted header">@Seia-Soto/Ohys-Fanmade</h4>
             <p>
-              Fanmade site of Ohys.
+              Ohys의 팬메이드 사이트입니다.
             </p>
           </div>
         </div>
         <div class="ui inverted section divider"></div>
         <img class="ui centered mini image" src="/assets/images/author.jpg" />
         <div class="ui horizontal inverted small divided link list">
-          <a class="item" href="https://raws.ohys.net/t">Back to Ohys</a>
+          <a class="item" href="https://raws.ohys.net/t">Ohys로 돌아가기</a>
           <a class="item">We are preparing policies</a>
         </div>
       </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="assets/scripts/ui.js" charset="utf-8"></script>
-    <script src="assets/zlib/jszip.min.js" charset="utf-8"></script>
-    <script src="assets/scripts/main.js" charset="utf-8"></script>
+    <script src="/assets/scripts/ui.js" charset="utf-8"></script>
+    <script src="/assets/zlib/jszip.min.js" charset="utf-8"></script>
+    <script src="/assets/scripts/index.d.js" charset="utf-8"></script>
   </body>
 </html>
