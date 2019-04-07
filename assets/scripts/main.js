@@ -12,4 +12,6 @@ const acceptableLanguages = {
 }
 const language = window.navigator.userLanguage || window.navigator.language
 
-window.location.href = './' + (acceptableLanguages[language.toLowerCase()] || 'en') + '.html'
+setTimeout(function() {
+  window.location.href = './' + (acceptableLanguages[language.toLowerCase()] || 'en') + '.html'
+}, 750)
