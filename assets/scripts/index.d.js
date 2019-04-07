@@ -229,8 +229,8 @@ function downloadList() {
   Links.forEach(function(el, i) {
     setTimeout(function() {
       Button.innerHTML = (Translations[language].downloading || 'Downloading ') +
-      (i + 1) + (Translations[language].of || ' of ') +
-      Links.length + (Translations[language].torrents || ' torrents')
+        (i + 1) + (Translations[language].of || ' of ') +
+        Links.length + (Translations[language].torrents || ' torrents')
 
       const File = {
         name: decodeURIComponent(el.href.split('/')[el.href.split('/').length - 1]),

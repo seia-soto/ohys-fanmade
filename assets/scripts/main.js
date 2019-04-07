@@ -5,7 +5,10 @@ const acceptableLanguages = {
   ko: 'ko',
   kr: 'ko',
   kor: 'ko',
-  'ko-kr': 'ko'
+  'ko-kr': 'ko',
+  ja: 'ja',
+  jp: 'ja',
+  jpn: 'ja'
 }
 const language = window.navigator.userLanguage || window.navigator.language
 
