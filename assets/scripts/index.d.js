@@ -1,10 +1,9 @@
 const BaseURL = 'https://ohys.seia.io/'
 const OriginalURL = 'https://torrents.ohys.net/'
 const DirectoryPatturnScope = {
-  '2019 (NEW)': 'new',
-  '2018': 'old18',
-  '2017': 'old17',
-  '2016': 'old16'
+  '2019 (NEW)': 'disk',
+  '2018': 'disk18',
+  '2017': 'disk17'
 }
 const ResolutionPatturnScope = {
   'all resolution': /\d{3,4}x\d{3,4}/,
