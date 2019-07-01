@@ -1,6 +1,6 @@
 # Ohys-Fanmade
 
-The fanmade site of Ohys-Raws.
+The fanmade site of Ohys-Raws. ([Link](https://ohys.seia.io/))
 
 ## Features
 
@@ -11,25 +11,6 @@ The fanmade site of Ohys-Raws.
 
 ## Adaptation
 
-Open `assets/scripts/main.js` with your editor.
+Open `assets/scripts/fanmade.js` with your editor.
 
-You can see `BaseURL` at line 5, edit it to relative path from public.
-
-```js
-const BaseURL = 'https://app.seia.io/Ohys-Fanmade/'
-const OriginalURL = 'https://torrents.ohys.net/t/'
-```
-
-Also migration of `port.php`(no.php) is needed.
-
-## Browser accessibility
-
-All is latest.
-
-| Browser/Task      | Search         | NightMode      |
-| :-------------    | :------------- | :------------- |
-| Chrome            | available      | preparing      |
-| Internet Explorer | available      | preparing      |
-| Safari            | available      | preparing      |
-| Edge              | available      | preparing      |
-| Naver Whale       | available      | preparing      |
+You can see `baseURI` at line 2, edit it to relative path from public.

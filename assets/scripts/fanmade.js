@@ -1,5 +1,5 @@
 // NOTE: Options
-const baseURI = 'https://app.seia.io/ohys/'
+const baseURI = 'https://ohys.seia.io/'
 const originalURI = 'https://torrents.ohys.net/'
 const myanimelistURI = 'https://myanimelist.net/'
 
