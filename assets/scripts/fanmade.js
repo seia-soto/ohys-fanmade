@@ -214,16 +214,18 @@ $(document).ready(function() {
         moreButton.show()
       }
 
-      if (options.viewOption === 'table') {
-        data.forEach(function(torrent, i) {
-          appendListItem(predictData(torrent))
-        })
-      } else {
-        // NOTE: Build as cards
-        data.forEach(function(torrent, i) {
-          setTimeout(function() {
-            const prediction = predictData(torrent)
+      data.forEach(function(torrent, i) {
+        const prediction = predictData(torrent)
 
+        if (options.resolution !== 'all' && options.resolution !== prediction.resolution) {
+          return null
+        }
+
+        if (options.viewOption === 'table') {
+          appendListItem(prediction)
+        } else {
+          // NOTE: Build as cards
+          setTimeout(function() {
             fetchMyanimelistData(prediction.name, function(response) {
               prediction.myanimelistQuery = JSON.parse(response).categories.filter(function(category) {
                 return category.type === 'anime'
@@ -232,8 +234,8 @@ $(document).ready(function() {
               appendCardItem(prediction)
             })
           }, (i * myanimelistQueryDelay) + myanimelistQueryDelay)
-        })
-      }
+        }
+      })
     })
   }
   function buildListFrom(what, resetResult) {
