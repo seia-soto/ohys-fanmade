@@ -28,10 +28,10 @@ const defaultScopes = {
 }
 const uriScopes = {
   ohys: {
-    jsonAPI: baseURI + 'json.php' // NOTE: https://ohys.seia.io/json.php?dir=disk&p=0
+    jsonAPI: 'proxies/ohys.php' // NOTE: https://ohys.seia.io/json.php?dir=disk&p=0
   },
   myanimelist: {
-    prefixAPI: baseURI + 'prefix.php/prefix.php' // NOTE: https://myanimelist.net/search/prefix.json?type=anime&keyword=sword%20art%20online&v=1
+    prefixAPI: 'proxies/myanimelist.php' // NOTE: https://myanimelist.net/search/prefix.json?type=anime&keyword=sword%20art%20online&v=1
   }
 }
 
@@ -104,20 +104,27 @@ $(document).ready(function() {
     $(appContext).attr('class', 'ui list')
   }
   function appendListItem(prediction) {
-    const outer = $('<div/>', {
+    const item = $('<div/>', {
       class: 'item'
     })
-    const inner = $('<div/>', {
+
+    const itemHeader = $('<a/>', {
       class: 'header',
-      text: prediction.original
+      text: prediction.name,
+      href: prediction.link
+    })
+    const itemDescription = $('<div/>', {
+      text: prediction.provider + ' / ' +
+        prediction.broadcaster + ' / ' +
+        prediction.resolution + ' / ' +
+        prediction.audioType + ' / ' +
+        prediction.videoType
     })
 
-    const link = $('<a/>', {
-      href: prediction.link,
-      text: 'Download (' + prediction.resolution + ')'
-    })
+    item.append(itemHeader)
+    item.append(itemDescription)
 
-    inner.add(link).appendTo(outer.appendTo(appContext))
+    appContext.append(item)
   }
   function prepareCardList(overwrite) {
     $(appContext).empty()
@@ -236,6 +243,7 @@ $(document).ready(function() {
   function buildListFrom(what, resetResult) {
     page = 0
     search = $(what).find('input').val() || ''
+    onload = true
 
     const options = predictOptions()
 

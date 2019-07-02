@@ -2,12 +2,9 @@
 
 The fanmade site of Ohys-Raws. ([Link](https://ohys.seia.io/))
 
-## Features
+## License
 
-- Search uploaded raws and print it as list.
-- Download all torrent files from list.
-- See resolution of uploaded raw at list.
-- Search with resolution option. (beta)
+License is following [AkaPage](https://github.com/Seia-Soto/AkaPage).
 
 ## Adaptation
 
