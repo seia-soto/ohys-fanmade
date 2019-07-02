@@ -4,7 +4,7 @@ const originalURI = 'https://torrents.ohys.net/'
 const myanimelistURI = 'https://myanimelist.net/'
 
 const titlePattern = /\[(.+)\]\s(.*)\ .*\((.[^\s]+)\s(.\d{3,4}x\d{3,4})\s(.*)\).*?\.([^.]*)/
-const myanimelistQueryDelay = 200
+const myanimelistQueryDelay = 100
 
 const acceptableLanguages = {
   en: 'en',
@@ -76,8 +76,8 @@ $(document).ready(function() {
   const contextTitle = $('article > h2.ui.header')
   const contextSearchInputPlaceholder = $('#searchInputCtx > input')
   const contextSearchInputButton = $('#searchInputCtx > .ui.teal.button')
-  const additionalOptionsHeader = $('article > div.ui.basic.fluid.accordion.segment > div.title')
-  const additionalOptionsColumns = $('article > div.ui.basic.fluid.accordion.segment > div.content > .ui.basic.equal.width.stackable.grid.segment > .column')
+  const additionalOptionsHeader = $('article > div.ui.basic.fluid.accordion.segment > div.active.title')
+  const additionalOptionsColumns = $('article > div.ui.basic.fluid.accordion.segment > div.active.content > .ui.basic.equal.width.stackable.grid.segment > .column')
   const additionalOptionsSubtitle_ReleasedYear = $(additionalOptionsColumns[0]).find('h3')
   const additionalOptionsSubtitle_Resolution = $(additionalOptionsColumns[1]).find('h3')
   const additionalOptionsSubtitle_ViewOption = $(additionalOptionsColumns[2]).find('h3')
@@ -158,20 +158,15 @@ $(document).ready(function() {
       class: 'extra content'
     })
     const cardExtraLeft = $('<span/>', {
-      text: 'Rating'
+      text: 'Rating ' + prediction.myanimelistQuery.payload.score
     })
     const cardExtraRight = $('<span/>', {
       class: 'right floated'
     })
-
-    if (prediction.myanimelistQuery.payload.score && prediction.myanimelistQuery.payload.score !== 'N/A') {
-      cardExtraRightRating = $('<div/>', {
-        class: 'ui star rating',
-        'data-rating': Math.round(prediction.myanimelistQuery.payload.score / 2)
-      })
-    } else {
-      cardExtraRight.text('N/A')
-    }
+    const cardExtraRightRating = $('<div/>', {
+      class: 'ui star rating',
+      'data-rating': Math.round(prediction.myanimelistQuery.payload.score / 2)
+    })
 
     cardImageContainer.append(cardImage)
 
@@ -179,7 +174,7 @@ $(document).ready(function() {
     cardContentContainer.append(cardMeta)
     cardContentContainer.append(cardDescription)
 
-    cardExtra.append(cardExtraRight.append(cardExtraRightRating || null))
+    cardExtra.append(cardExtraRight.append(cardExtraRightRating))
     cardExtra.append(cardExtraLeft)
 
     outline.append(cardImageContainer)
