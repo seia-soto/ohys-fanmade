@@ -202,7 +202,7 @@ $(document).ready(function() {
     requestChunk(uri, callback)
   }
   function fetchMyanimelistData(name, callback) {
-    const uri = uriScopes.myanimelist.prefixAPI + '?type=anime&v=1&keyword=' + name
+    const uri = uriScopes.myanimelist.prefixAPI + '?type=anime&v=1&keyword=' + name.replace(/[\&\s]/gi, '_')
 
     requestChunk(uri, callback)
   }
@@ -223,19 +223,23 @@ $(document).ready(function() {
           return null
         }
 
-        if (options.viewOption === 'table') {
-          appendListItem(prediction)
-        } else {
-          // NOTE: Build as cards
-          setTimeout(function() {
-            fetchMyanimelistData(prediction.name, function(response) {
-              prediction.myanimelistQuery = JSON.parse(response).categories.filter(function(category) {
-                return category.type === 'anime'
-              })[0].items[0]
+        switch (options.viewOption) {
+          case 'table':
+            appendListItem(prediction)
+            break;
+          case 'card':
+            setTimeout(function() {
+              fetchMyanimelistData(prediction.name, function(response) {
+                prediction.myanimelistQuery = JSON.parse(response).categories.filter(function(category) {
+                  return category.type === 'anime'
+                })[0].items[0]
 
-              appendCardItem(prediction)
-            })
-          }, (i * myanimelistQueryDelay) + myanimelistQueryDelay)
+                appendCardItem(prediction)
+              })
+            }, (i * myanimelistQueryDelay) + myanimelistQueryDelay)
+            break;
+          default:
+            alert('Invalid view option provided!')
         }
       })
     })
