@@ -3,7 +3,7 @@ const baseURI = 'https://ohys.seia.io/'
 const originalURI = 'https://torrents.ohys.net/'
 const myanimelistURI = 'https://myanimelist.net/'
 
-const titlePattern = /\[(.+)\]\s(.*)\ .*\((.[^\s]+)\s(.\d{3,4}x\d{3,4})\s(.*)\).*?\.([^.]*)/
+const titlePattern = /\[Ohys-Raws\]\s(.*)\ .*\((.[^\s]+)\s(.\d{3,4}x\d{3,4})\s(.*)\).*?\.([^.]*)/
 const myanimelistQueryDelay = 100
 
 const acceptableLanguages = {
@@ -52,12 +52,11 @@ function predictData(torrent) {
   const predictionData = titlePattern.exec(torrent.t)
 
   const prediction = {
-    provider: predictionData[1], // NOTE: Ohys-Raws
-    name: predictionData[2], // NOTE: Name of torrent
-    broadcaster: predictionData[3], // NOTE: broadcaster of torrent
-    resolution: predictionData[4], // NOTE: Resolution of torrent
-    audioType: predictionData[5], // NOTE: Audio type like 'x264 AAC'
-    videoType: predictionData[6], // NOTE: Video type like 'mp4'
+    name: predictionData[1], // NOTE: Name of torrent
+    broadcaster: predictionData[2], // NOTE: broadcaster of torrent
+    resolution: predictionData[3], // NOTE: Resolution of torrent
+    audioType: predictionData[4], // NOTE: Audio type like 'x264 AAC'
+    videoType: predictionData[5], // NOTE: Video type like 'mp4'
     link: originalURI + 't/' + torrent.a,
     original: torrent.t
   }
@@ -114,7 +113,7 @@ $(document).ready(function() {
       href: prediction.link
     })
     const itemDescription = $('<div/>', {
-      text: prediction.provider + ' / ' +
+      text: 'Ohys-Raws / ' +
         prediction.broadcaster + ' / ' +
         prediction.resolution + ' / ' +
         prediction.audioType + ' / ' +
